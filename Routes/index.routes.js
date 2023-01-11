@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 // Controllers
-const { test } = require("../controllers/index.controllers");
+const { bringAllJewelry } = require("../controllers/index.controllers");
 // Routes
-router.get("/", test);
+router.get("/joyas", bringAllJewelry);
 
 module.exports = router;

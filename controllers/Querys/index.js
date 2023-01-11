@@ -9,9 +9,11 @@ const credentials = {
 };
 const pool = new Pool(credentials);
 // Querys
-const getJewelers = async () => {
-  const { rows: allDataJoyas } = await pool.query("SELECT * FROM inventario");
-  return allDataJoyas;
+const getJewelers = async ({ limit = 3 }) => {
+  const consulta = "SELECT * FROM inventario LIMIT $1";
+  const valores = [limit];
+  const { rows: allDataJewelers } = await pool.query(consulta, valores);
+  return allDataJewelers;
 };
 
 module.exports = { getJewelers };
