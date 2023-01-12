@@ -1,4 +1,5 @@
 const { Pool } = require("pg");
+const format = require("pg-format");
 //
 const credentials = {
   host: "localhost",
@@ -9,10 +10,15 @@ const credentials = {
 };
 const pool = new Pool(credentials);
 // Querys
-const getJewelers = async ({ limit = 3 }) => {
-  const consulta = "SELECT * FROM inventario LIMIT $1";
-  const valores = [limit];
-  const { rows: allDataJewelers } = await pool.query(consulta, valores);
+const getJewelers = async ({ limit = 3, order_by = "ASC", page = 0 }) => {
+  const offset = page * limit;
+  const formattedQuery = format(
+    "SELECT * FROM inventario ORDER BY stock %s LIMIT %s OFFSET %s",
+    order_by,
+    limit,
+    offset
+  );
+  const { rows: allDataJewelers } = await pool.query(formattedQuery);
   return allDataJewelers;
 };
 

@@ -16,3 +16,5 @@ INSERT INTO inventario values
 (DEFAULT, 'Aros Hook Blue', 'aros', 'oro', 25000 , 4),
 (DEFAULT, 'Anillo Wish', 'aros', 'plata', 30000 , 4),
 (DEFAULT, 'Anillo Cuarzo Greece', 'anillo', 'oro', 40000 , 2);
+
+SELECT * FROM inventario ORDER BY stock ASC LIMIT 2;
