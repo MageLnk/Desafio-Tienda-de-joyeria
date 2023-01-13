@@ -7,6 +7,18 @@ const PORT = process.env.PORT || 3000;
 // Middlewares
 app.use(cors());
 app.use(express.json());
+app.use((req, res, next) => {
+  const parametros = req.params;
+  const url = req.url;
+  console.log(
+    `
+    Hoy ${new Date()}
+    Se ha recibido una consulta en la ruta ${url}
+    acompañado de los parámetros: `,
+    parametros
+  );
+  return next();
+});
 // Routes
 const routing = require("./Routes/index.routes");
 // NOTA. También se puede poner directamente
@@ -14,7 +26,6 @@ const routing = require("./Routes/index.routes");
 
 // App
 app.use(routing);
-
 // Catcher
 app.get("*", (req, res) => {
   res.status(404).send({ msg: "Ruta not found" });
