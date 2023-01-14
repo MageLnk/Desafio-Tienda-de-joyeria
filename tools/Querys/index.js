@@ -29,12 +29,33 @@ const getJewelers = async ({ limit = 3, order_by = "id_ASC", page = 1 }) => {
   }
 };
 
-const getJewel = async ({ id }) => {
+const filterJewels = async ({ precio_min, precio_max, categoria, metal }) => {
   try {
-    return { Test: "Traeré la data", id };
+    let filters = [];
+    const values = [];
+    const addFilter = (option, comparator, value) => {
+      values.push(value);
+      const { length } = filters;
+
+      filters.push(`${option} ${comparator} $${length + 1}`);
+    };
+    if (precio_max) addFilter("precio", "<=", precio_max);
+    if (precio_min) addFilter("precio", ">=", precio_min);
+    if (categoria) addFilter("categoria", "=", categoria);
+    if (metal) addFilter("metal", "=", metal);
+
+    let query = "SELECT * FROM inventario";
+
+    if (filters.length > 0) {
+      filters = filters.join(" AND ");
+      query += ` WHERE ${filters}`;
+    }
+
+    const { rows: filteredJewels } = await pool.query(query, values);
+    return filteredJewels;
   } catch (error) {
     throw error;
   }
 };
 
-module.exports = { getJewelers, getJewel };
+module.exports = { getJewelers, filterJewels };

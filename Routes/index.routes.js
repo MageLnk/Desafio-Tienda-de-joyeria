@@ -5,6 +5,6 @@ const { bringAllJewelry, bringDetailJewel } = require("../controllers/index.cont
 // Routes
 router.get("/joyas", bringAllJewelry);
 
-router.get("/joyas/filtros/:id", bringDetailJewel);
+router.get("/joyas/filtros", bringDetailJewel);
 
 module.exports = router;
