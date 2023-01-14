@@ -29,4 +29,12 @@ const getJewelers = async ({ limit = 3, order_by = "id_ASC", page = 1 }) => {
   }
 };
 
-module.exports = { getJewelers };
+const getJewel = async ({ id }) => {
+  try {
+    return { Test: "Traeré la data", id };
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = { getJewelers, getJewel };

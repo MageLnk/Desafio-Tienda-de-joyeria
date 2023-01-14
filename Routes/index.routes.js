@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 // Controllers
-const { bringAllJewelry } = require("../controllers/index.controllers");
+const { bringAllJewelry, bringDetailJewel } = require("../controllers/index.controllers");
 // Routes
 router.get("/joyas", bringAllJewelry);
+
+router.get("/joyas/filtros/:id", bringDetailJewel);
 
 module.exports = router;
