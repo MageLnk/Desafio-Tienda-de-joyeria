@@ -34,3 +34,5 @@ app.get("*", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server runing on port: ${PORT}. Everything is fine`);
 });
+
+// Controlador tiene el console log del error en el throw
